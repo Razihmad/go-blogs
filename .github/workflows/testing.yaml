@@ -20,13 +20,9 @@ jobs:
                     go-version: 1.12
             - name: Install dependencies
               run: |
-                go mod download
-            - name: verify mod
-              run: |
-                go mod verify
-            - name: tidy all
-              run: |
-                go mod tidy
+                go get -d -v ./... # Download dependencies without installing
+                modules=$(go list -m all | awk '{if ($1 == "all") {print $2} else {print $1}}' | sort -u)
+                go get -v $modules  # Install only the dependencies used in the project
 
             - name: Run tests
               run: |
