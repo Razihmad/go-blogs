@@ -21,8 +21,13 @@ jobs:
             - name: Install dependencies
               run: |
                 go mod download
+            - name: verify mod
+              run: |
                 go mod verify
+            - name: tidy all
+              run: |
                 go mod tidy
+
             - name: Run tests
               run: |
                 go test -v ./...
