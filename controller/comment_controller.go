@@ -15,7 +15,7 @@ func CommentToPost(c *fiber.Ctx) error {
 			"message": "Cannot parse JSON",
 		})
 	}
-	post_id := c.Params("post_id")
+	post_id := c.Query("post_id")
 	fmt.Println("post id:", post_id)
 	comment, err := usecase.CommentToPost(c, *comment)
 	if err != nil {
